@@ -9,12 +9,16 @@ var polyline;
 var polylineArr = [];
 
 var circleArr = [];
-var circleBound;
+var circleCenter;
+var circleRadius;
 
 var infowindow;
+
+// 탐색 범위 on/off
 var rangeActivate = false;
 
 var distanceOverlay;
+var placeOverlay;
 
 // 마커 초기화
 function delMarker() {
@@ -36,6 +40,8 @@ function delCircle() {
         circleArr[i].setMap(null);
     }
     circleArr = [];
+    circleCenter = null;
+    circleRadius = null;
     rangeActivate = false;
 }
 // infowindo 초기화
@@ -293,6 +299,7 @@ function setPoint() {
 
 }
 
+
 // 교통 찾기
 function traceRoute() {
     // 카카오는 api 없대고 url scheme도 반쪽밖에 안돼서 naver씀
@@ -304,6 +311,7 @@ function traceRoute() {
     }
 
 }
+
 
 // 범위 탐색
 function traceRange() {
@@ -335,11 +343,76 @@ function traceRange() {
         circle.setMap(map);
         circleArr.push(circle);
 
-        circleBound = circle.getBounds();
+        circleCenter = circle.getPosition();
+        circleRadius = circle.getRadius();
+
         rangeActivate = true;
     }
 }
 
+
+// 뭘 찾는지 고르는거
+/*
+    PK6 : 주차장
+    OL7 : 주유,충전소
+    AT4 : 관광명소
+    AD5 : 숙박
+    FD6 : 음식점
+    CE7 : 카페
+*/
+function setCategory() {
+    // 아니 그냥 select로 가져올 수 있는거잖아
+}
+
+
+
+// 지점정보 확인
+function nearSearch() {
+    if (rangeActivate) {
+        // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+        infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+
+        // 장소 검색 객체를 생성합니다
+        var ps = new kakao.maps.services.Places(map);
+
+        // 카테고리로 은행을 검색합니다
+        ps.categorySearch('CE7', placesSearchCB, { location: circleCenter, radius: circleRadius });
+
+        // 키워드 검색 완료 시 호출되는 콜백함수 입니다
+        function placesSearchCB(data, status, pagination) {
+            if (status === kakao.maps.services.Status.OK) {
+                for (var i = 0; i < data.length; i++) {
+                    displayMarker(data[i]);
+                }
+            }
+        }
+
+        // 지도에 마커를 표시하는 함수입니다
+        function displayMarker(place) {
+
+            marker = new kakao.maps.Marker({
+                map: map,
+                position: new kakao.maps.LatLng(place.y, place.x)
+            });
+            markers.push(marker);
+
+            // 마커에 클릭이벤트를 등록합니다
+            kakao.maps.event.addListener(marker, 'click', function () {
+                // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+                infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+                infowindow.open(map, marker);
+            });
+        }
+    } else {
+        alert("탐색 범위를 먼저 설정해 주세요");
+    }
+}
+
+
+
+
+// 인증 맛집은 보류야~
+/*
 
 function toCoordinate() {
 
@@ -355,7 +428,6 @@ function toCoordinate() {
         delMarker();
         delInfo();
 
-
         var geocoder = new kakao.maps.services.Geocoder();
         infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
@@ -363,48 +435,46 @@ function toCoordinate() {
 
             for (i in data) {
                 // console.log("이름 :" + data[i].식당명 + " , 주소 :" + data[i].주소);
-
                 geocoder.addressSearch(data[i].주소, function (result, status) {
 
-                    // 정상적으로 검색이 완료됐으면 
+                    // 정상적으로 검색이 완료됐으면
                     if (status === kakao.maps.services.Status.OK) {
 
                         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
                         if (circleBound.contain(coords)) {
+
                             var marker = new kakao.maps.Marker({
                                 map: map,
                                 position: coords,
-                                removable: true
+                                title: data[i].식당명
                             });
                             markers.push(marker);
 
+                            // kakao.maps.event.addListener(marker, 'click', function () {
+                            //     // 마커 클릭시 인포윈도우 표출
+                            //     infowindow.setContent('<div style="padding:5px;font-size:10px;">' + data[i].식당명 + '</div>');
+                            //     infowindow.open(map, marker);
+                            // });
 
-
-                            kakao.maps.event.addListener(marker, 'click', function () {
-                                // 마커 클릭시 인포윈도우 표출
-                                infowindow.setContent('<div style="padding:5px;font-size:10px;">' + '미완' + '</div>');
-                                infowindow.open(map, marker);
-                            });
 
                         }
-
                     }
                 });
 
-
             };
-
-
 
         });
 
     } else {
         alert("범위를 설정하세요");
     }
-
     // return (markers.length === 0) ? alert("주변에 등록된 맛집이 없습니다") : "";
 }
+
+// 콜백으로 리턴이 나와야하는데
+
+*/
 
 
 
