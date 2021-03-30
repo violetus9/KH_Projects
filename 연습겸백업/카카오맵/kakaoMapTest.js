@@ -73,6 +73,10 @@ function nowhere() {
         distanceOverlay.setMap(null);
         distanceOverlay = null;
     }
+    if (startCoord && endCoord) {
+        startCoord = null;
+        endCoord = null;
+    }
 
     delMarker();
     delPoly();
@@ -307,7 +311,7 @@ function setPoint() {
 // 교통 찾기
 function traceRoute() {
     // 카카오는 api 없대고 url scheme도 반쪽밖에 안돼서 naver씀
-    if (startCoord === null && endCoord === null) {
+    if (startCoord === null || endCoord === null) {
         alert("출발, 도착 지점을 먼저 설정하세요");
 
     } else {
