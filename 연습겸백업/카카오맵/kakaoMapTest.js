@@ -406,15 +406,19 @@ function nearSearch() {
         var ps = new kakao.maps.services.Places(map);
 
         // 카테고리로 검색합니다
-        ps.categorySearch('CE7', placesSearchCB, { location: circleCenter, radius: circleRadius });
+        ps.categorySearch('CE7', placesSearchCB, { location: circleCenter, radius: circleRadius, page: 1 });
 
         // 키워드 검색 완료 시 호출되는 콜백함수 입니다
         function placesSearchCB(data, status, pagination) {
+
             if (status === kakao.maps.services.Status.OK) {
+
                 for (var i = 0; i < data.length; i++) {
                     displayMarker(data[i]);
                 }
+                pagination.nextPage();
             }
+
         }
 
         // 지도에 마커를 표시하는 함수입니다
@@ -437,7 +441,7 @@ function nearSearch() {
         function displayPlaceInfo(place) {
             var content = '<div class="placeinfo">' +
                 '   <a class="title" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">'
-                + place.place_name + '</a>' + '<span onclick="delInfo();" title="닫기" right="3px;">---------이 곳을 클릭하면 창을 닫습니다---------</span>';
+                + place.place_name + '</a>' + '<span onclick="delInfo();" title="닫기">---------이 곳을 클릭하면 창을 닫습니다---------</span>';
 
             if (place.road_address_name) {
                 content += '    <span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
