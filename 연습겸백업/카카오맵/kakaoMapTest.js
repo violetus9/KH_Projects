@@ -21,12 +21,21 @@ var rangeActivate = false;
 var distanceOverlay;
 var placeOverlay;
 
+var clusterer = null;
+var clusterMap = new Map();
+
+var mouseRCoord;
+
 // 마커 초기화
 function delMarker() {
     for (var i in markers) {
         markers[i].setMap(null);
     }
     markers = [];
+    if (clusterer) {
+        clusterer.clear();
+        clusterer = null;
+    }
 }
 // 라인 초기화
 function delPoly() {
@@ -65,6 +74,16 @@ var mapContainer = document.getElementById('map'), // 지도 div
 
 // div, 지도 옵션 > 지도 생성
 var map = new kakao.maps.Map(mapContainer, mapOption);
+
+
+// 줌 변화시
+kakao.maps.event.addListener(map, 'zoom_changed', function () {
+    // 불필요한 오버레이 삭제
+    if (placeOverlay) {
+        placeOverlay.setMap(null);
+    }
+});
+
 
 // 현위치
 function nowhere() {
@@ -108,7 +127,7 @@ function nowhere() {
             position: locPosition
         });
         markers.push(marker);
-        map.setCenter(locPosition);
+        map.panTo(locPosition);
     }
 
 }
@@ -367,11 +386,11 @@ function traceRange() {
     AD5 : 숙박
     FD6 : 음식점
     CE7 : 카페
+    HP8 : 병원
 */
 function setCategory() {
-    // 아니 그냥 select로 가져올 수 있는거잖아
+    // 아니 그냥 select로 가져올 ? 일단보류
 }
-
 
 
 // 지점정보 확인
@@ -412,40 +431,71 @@ function nearSearch() {
         // 카테고리로 검색합니다
         ps.categorySearch('CE7', placesSearchCB, { location: circleCenter, radius: circleRadius, page: 1 });
 
-        // 키워드 검색 완료 시 호출되는 콜백함수 입니다
+        // 키워드 검색의 콜백
         function placesSearchCB(data, status, pagination) {
 
             if (status === kakao.maps.services.Status.OK) {
 
                 for (var i = 0; i < data.length; i++) {
                     displayMarker(data[i]);
+                    // console.log(data[i].id);
+
                 }
                 pagination.nextPage();
             }
 
         }
 
-        // 지도에 마커를 표시하는 함수입니다
+        // 클러스터링
+        clusterer = new kakao.maps.MarkerClusterer({
+            map: map,
+            averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+            minLevel: 2,
+            disableClickZoom: true
+        });
+
+        // 마커 표시
         function displayMarker(place) {
 
             marker = new kakao.maps.Marker({
-                map: map,
+                // map: map,
                 position: new kakao.maps.LatLng(place.y, place.x)
             });
             markers.push(marker);
+            clusterer.addMarkers(markers);
+            clusterMap.set(marker, place);
 
-            // 마커에 클릭이벤트를 등록합니다
+            // 마커 클릭시
             kakao.maps.event.addListener(marker, 'click', function () {
-                // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+                // 장소명 인포윈도우
                 displayPlaceInfo(place);
             });
+
+
         }
+
+        // 클러스터 클릭 이벤트
+        kakao.maps.event.addListener(clusterer, 'clusterrightclick', function (cluster) {
+
+            mouseRCoord = cluster.getCenter();
+            var tempArray = [];
+            for (i in cluster.getMarkers()) {
+                tempArray.push(clusterMap.get(cluster._markers[i]));
+                // console.log(cluster._markers[i])
+            }
+            // clusterMap.forEach(x => tempArray.push(x))
+            // console.log(tempArray);
+            // console.log(tempArray[0].address_name)
+
+            clusterInfo(tempArray);
+
+        });
 
         // 클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시하는 함수입니다
         function displayPlaceInfo(place) {
             var content = '<div class="placeinfo">' +
                 '   <a class="title" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">'
-                + place.place_name + '</a>' + '<span onclick="delInfo();" title="닫기">---------이 곳을 클릭하면 창을 닫습니다---------</span>';
+                + place.place_name + '</a>' + '<div id="closeinfo" onclick="delInfo();" title="닫기" >닫기</div>';
 
             if (place.road_address_name) {
                 content += '    <span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
@@ -457,15 +507,71 @@ function nearSearch() {
             content += '    <span class="tel">' + place.phone + '</span>' +
                 '</div>' +
                 '<div class="after"></div>';
-
             contentNode.innerHTML = content;
             placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
             placeOverlay.setMap(map);
         }
+
+
+        // 클러스터 오버레이
+        function clusterInfo(places) {
+            // 객체 내부 마커 수만큼 인자 받아와서 div생성(오버레이)
+            var contentList = '';
+            // 출력 String임 for 써서 이어붙이기
+            console.log(places)
+            var cnt = 0;
+            while (cnt !== places.length - 1) {
+                contentList += '<div class="placeinfo">' +
+                    '   <a class="title" href="' + places[i].place_url + '" target="_blank" title="' + places[i].place_name + '">'
+                    + places[i].place_name + '</a></div>';
+                cnt += 1;
+            }
+
+            contentNode.innerHTML = contentList;
+            placeOverlay.setPosition(new kakao.maps.LatLng(mouseRCoord));
+            placeOverlay.setMap(map);
+
+        }
+
     } else {
         alert("탐색 범위를 먼저 설정해 주세요");
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -534,28 +640,6 @@ function toCoordinate() {
 // 콜백으로 리턴이 나와야하는데
 
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
