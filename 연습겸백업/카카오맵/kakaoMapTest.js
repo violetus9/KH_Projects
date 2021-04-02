@@ -2,33 +2,33 @@
 
 
 
-var markers = [];
-var startCoord = null;
-var endCoord = null;
+let markers = [];
+let startCoord = null;
+let endCoord = null;
 
-var polyline;
-var polylineArr = [];
+let polyline;
+let polylineArr = [];
 
-var circleArr = [];
-var circleCenter;
-var circleRadius;
+let circleArr = [];
+let circleCenter;
+let circleRadius;
 
-var infowindow;
+let infowindow;
 
 // 탐색 범위 on/off
-var rangeActivate = false;
+let rangeActivate = false;
 
-var distanceOverlay;
-var placeOverlay;
+let distanceOverlay;
+let placeOverlay;
 
-var clusterer = null;
-var clusterMap = new Map();
+let clusterer = null;
+let clusterMap = new Map();
 
-var mouseRCoord;
+let mouseRCoord;
 
 // 마커 초기화
 function delMarker() {
-    for (var i in markers) {
+    for (let i in markers) {
         markers[i].setMap(null);
     }
     markers = [];
@@ -39,14 +39,14 @@ function delMarker() {
 }
 // 라인 초기화
 function delPoly() {
-    for (var i in polylineArr) {
+    for (let i in polylineArr) {
         polylineArr[i].setMap(null);
     }
     polylineArr = [];
 }
 // 원 초기화
 function delCircle() {
-    for (var i in circleArr) {
+    for (let i in circleArr) {
         circleArr[i].setMap(null);
     }
     circleArr = [];
@@ -66,14 +66,14 @@ function delInfo() {
 
 
 // 로딩
-var mapContainer = document.getElementById('map'), // 지도 div 
+let mapContainer = document.getElementById('map'), // 지도 div 
     mapOption = {
         center: new kakao.maps.LatLng(37.51138291837466, 127.09807488796521), // 지도 중심
         level: 5 // 확대 레벨
     };
 
 // div, 지도 옵션 > 지도 생성
-var map = new kakao.maps.Map(mapContainer, mapOption);
+let map = new kakao.maps.Map(mapContainer, mapOption);
 
 
 // 줌 변화시
@@ -106,14 +106,14 @@ function nowhere() {
     if (navigator.geolocation) {
         // GeoLocation, 접속위치 get
         navigator.geolocation.getCurrentPosition(function (position) {
-            var lat = position.coords.latitude, // 위도
+            let lat = position.coords.latitude, // 위도
                 lon = position.coords.longitude; // 경도
-            var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시 위치 > geolocation 좌표로
+            let locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시 위치 > geolocation 좌표로
             // 마커, 인포윈도우 표시
             displayMarker(locPosition);
         });
     } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치
-        var locPosition = new kakao.maps.LatLng(37.56642857824065, 126.95110193435923);
+        let locPosition = new kakao.maps.LatLng(37.56642857824065, 126.95110193435923);
         displayMarker(locPosition);
     }
 
@@ -122,7 +122,7 @@ function nowhere() {
         // 중첩마커 삭제
         delMarker();
         // 마커 생성
-        var marker = new kakao.maps.Marker({
+        let marker = new kakao.maps.Marker({
             map: map,
             position: locPosition
         });
@@ -151,28 +151,28 @@ function setPoint() {
 
     alert("깃발을 움직여 경로를 설정해주세요");
     alert("설정이 끝났다면 우클릭으로 설정을 종료하세요")
-    var latlng = map.getCenter();
+    let latlng = map.getCenter();
 
-    var startSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png',
+    let startSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png',
         startSize = new kakao.maps.Size(50, 45),
         startOption = {
             offset: new kakao.maps.Point(15, 43) // 출발 마커이미지서 마커 좌표에 일치시킬 좌표 설정 (기본값은 이미지의 가운데 아래)
         };
 
     // 출발 마커 이미지 생성
-    var startImage = new kakao.maps.MarkerImage(startSrc, startSize, startOption);
+    let startImage = new kakao.maps.MarkerImage(startSrc, startSize, startOption);
 
-    var startDragSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_drag.png',
+    let startDragSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_drag.png',
         startDragSize = new kakao.maps.Size(50, 64),
         startDragOption = {
             offset: new kakao.maps.Point(15, 54) // 출발 마커 드래그 이미지서 마커 좌표에 일치시킬 좌표 설정 (기본값은 이미지의 가운데 아래)
         };
 
-    var startDragImage = new kakao.maps.MarkerImage(startDragSrc, startDragSize, startDragOption);
-    var startPosition = new kakao.maps.LatLng(latlng.Ma - 0.0005, latlng.La - 0.0005);
+    let startDragImage = new kakao.maps.MarkerImage(startDragSrc, startDragSize, startDragOption);
+    let startPosition = new kakao.maps.LatLng(latlng.Ma - 0.0005, latlng.La - 0.0005);
 
     // 출발 마커 생성
-    var startMarker = new kakao.maps.Marker({
+    let startMarker = new kakao.maps.Marker({
         map: map,
         position: startPosition,
         draggable: true,
@@ -192,26 +192,26 @@ function setPoint() {
         startMarker.setImage(startImage);
     });
 
-    var arriveSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png',
+    let arriveSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png',
         arriveSize = new kakao.maps.Size(50, 45),
         arriveOption = {
             offset: new kakao.maps.Point(15, 43) // 도착 마커이미지서 마커 좌표에 일치시킬 좌표 설정 (기본값은 이미지의 가운데 아래)
         };
 
     // 도착 마커 이미지 생성
-    var arriveImage = new kakao.maps.MarkerImage(arriveSrc, arriveSize, arriveOption);
+    let arriveImage = new kakao.maps.MarkerImage(arriveSrc, arriveSize, arriveOption);
 
-    var arriveDragSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_drag.png',
+    let arriveDragSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_drag.png',
         arriveDragSize = new kakao.maps.Size(50, 64),
         arriveDragOption = {
             offset: new kakao.maps.Point(15, 54) // 도착 마커 드래그 이미지서 마커 좌표에 일치시킬 좌표 설정 (기본값은 이미지의 가운데 아래)
         };
 
-    var arriveDragImage = new kakao.maps.MarkerImage(arriveDragSrc, arriveDragSize, arriveDragOption);
-    var arrivePosition = new kakao.maps.LatLng(latlng.Ma + 0.0005, latlng.La + 0.0005);
+    let arriveDragImage = new kakao.maps.MarkerImage(arriveDragSrc, arriveDragSize, arriveDragOption);
+    let arrivePosition = new kakao.maps.LatLng(latlng.Ma + 0.0005, latlng.La + 0.0005);
 
     // 도착 마커 생성 
-    var arriveMarker = new kakao.maps.Marker({
+    let arriveMarker = new kakao.maps.Marker({
         map: map,
         position: arrivePosition,
         draggable: true,
@@ -234,23 +234,23 @@ function setPoint() {
     // 마우스 우클릭 > 선 그리기 종료시 호출, HTML Content 리턴
     function getTimeHTML(distance) {
         // 도보의 시속은 평균 4km/h 이고 도보의 분속은 67m/min입니다
-        var walkkTime = distance / 67 | 0;
-        var walkHour = '', walkMin = '';
+        let walkkTime = distance / 67 | 0;
+        let walkHour = '', walkMin = '';
         // 계산한 도보 시간이 60분 보다 크면 시간으로 표시합니다
         if (walkkTime > 60) {
             walkHour = '<span class="number">' + Math.floor(walkkTime / 60) + '</span>시간 '
         }
         walkMin = '<span class="number">' + walkkTime % 60 + '</span>분'
         // 자전거의 평균 시속은 16km/h 이고 이것을 기준으로 자전거의 분속은 267m/min입니다
-        var bycicleTime = distance / 227 | 0;
-        var bycicleHour = '', bycicleMin = '';
+        let bycicleTime = distance / 227 | 0;
+        let bycicleHour = '', bycicleMin = '';
         // 계산한 자전거 시간이 60분 보다 크면 시간으로 표출합니다
         if (bycicleTime > 60) {
             bycicleHour = '<span class="number">' + Math.floor(bycicleTime / 60) + '</span>시간 '
         }
         bycicleMin = '<span class="number">' + bycicleTime % 60 + '</span>분'
 
-        var content = '<ul class="dotOverlay distanceInfo">';
+        let content = '<ul class="dotOverlay distanceInfo">';
         content += '    <li>';
         content += '        <span class="label">총거리</span><span class="number">' + distance + '</span>m';
         content += '    </li>';
@@ -290,7 +290,7 @@ function setPoint() {
 
 
 
-    var rClickEvent = function (mouseEvent) {
+    let rClickEvent = function (mouseEvent) {
 
         kakao.maps.event.removeListener(map, 'rightclick', rClickEvent);
 
@@ -299,7 +299,7 @@ function setPoint() {
         startCoord = markers[0].getPosition();
         endCoord = markers[1].getPosition();
 
-        var linePath = [
+        let linePath = [
             new kakao.maps.LatLng(startCoord.getLat(), startCoord.getLng()),
             new kakao.maps.LatLng(endCoord.getLat(), endCoord.getLng())
         ];
@@ -315,7 +315,7 @@ function setPoint() {
         polyline.setMap(map);
         polylineArr.push(polyline);
 
-        var distance = Math.round(polyline.getLength()), // 선의 총 거리
+        let distance = Math.round(polyline.getLength()), // 선의 총 거리
             content = getTimeHTML(distance); // 커스텀오버레이에 추가될 내용
 
         showDistance(content, endCoord);
@@ -355,9 +355,9 @@ function traceRange() {
         alert("출발, 도착 지점을 먼저 설정하세요.\n만약 설정을 마무리하지 않았다면 우클릭으로 설정을 완료하세요");
 
     } else {
-        var Lat = (startCoord.getLat() + endCoord.getLat()) / 2;
-        var Lng = (startCoord.getLng() + endCoord.getLng()) / 2;
-        var circle = new kakao.maps.Circle({
+        let Lat = (startCoord.getLat() + endCoord.getLat()) / 2;
+        let Lng = (startCoord.getLng() + endCoord.getLng()) / 2;
+        let circle = new kakao.maps.Circle({
             center: new kakao.maps.LatLng(Lat, Lng),
             radius: polyline.getLength() / 2,
             strokeWeight: 1,
@@ -426,7 +426,7 @@ function nearSearch() {
         }
 
         // 장소 검색
-        var ps = new kakao.maps.services.Places(map);
+        let ps = new kakao.maps.services.Places(map);
 
         // 카테고리로 검색합니다
         ps.categorySearch('CE7', placesSearchCB, { location: circleCenter, radius: circleRadius, page: 1 });
@@ -436,7 +436,7 @@ function nearSearch() {
 
             if (status === kakao.maps.services.Status.OK) {
 
-                for (var i = 0; i < data.length; i++) {
+                for (let i = 0; i < data.length; i++) {
                     displayMarker(data[i]);
                     // console.log(data[i].id);
                 }
@@ -477,7 +477,7 @@ function nearSearch() {
         kakao.maps.event.addListener(clusterer, 'clusterrightclick', function (cluster) {
 
             mouseRCoord = cluster.getCenter();
-            var tempArray = [];
+            let tempArray = [];
             for (i in cluster.getMarkers()) {
                 tempArray.push(clusterMap.get(cluster._markers[i]));
                 // console.log(cluster._markers[i])
@@ -491,7 +491,7 @@ function nearSearch() {
 
         // 클릭한 마커 오버레이
         function displayPlaceInfo(place) {
-            var content = '<div class="placeinfo">' +
+            let content = '<div class="placeinfo">' +
                 '   <a class="title" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">'
                 + place.place_name + '</a>' + '<div id="closeinfo" onclick="delInfo();" title="닫기" >닫기</div>';
 
@@ -514,9 +514,9 @@ function nearSearch() {
         // 클러스터 오버레이
         function clusterInfo(places) {
             // 객체 내부 마커 수만큼 인자 받아와서 div생성(오버레이)
-            var contentList = '';
+            let contentList = '';
             // 출력 String임 for 써서 이어붙이기
-            var cnt = 0;
+            let cnt = 0;
             while (cnt !== places.length) {
                 contentList += '<div class="placeinfolist">' +
                     '   <a class="title" href="' + places[cnt].place_url + '" target="_blank" title="' + places[cnt].place_name + '">'
@@ -593,7 +593,7 @@ function nearSearch() {
 /* memo
 
     교통안내 url scheme https://map.kakao.com/link/to/카카오판교오피스,37.402056,127.108212
-    클릭 위도경도 var latlng = mouseEvent.latLng;
+    클릭 위도경도 let latlng = mouseEvent.latLng;
     콜백함수
 
 */
