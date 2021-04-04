@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="placemapper">
+
+	<resultMap type="myPlaceDto" id="myPlaceMap">
+		<result property="myid" column="MYID" />
+		<result property="placename" column="PLACENAME" />
+		<result property="placeaddr" column="PLACEADDR" />
+		<result property="placedate" column="PLACEDATE" />
+		<result property="thumbs" column="THUMBS" />
+	</resultMap>
+
+	<select id="insert" parameterType="myPlaceDto">
+		INSERT INTO MYPLACE
+		VALUES(#{myid}, #{placename}, #{placeaddr}, SYSDAYE, #{thumbs})
+	</select>
+
+</mapper>
