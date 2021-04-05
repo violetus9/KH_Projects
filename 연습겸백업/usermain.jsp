@@ -444,24 +444,30 @@ A:VISITED {
 							</div>
 							<!-- 지도api연결하기 -->
 							<div>
-								<input type="button" value="출발" onclick=""> <input
-									type="text" placeholder="지도에서 클릭해주세요.">
+								<input type="button" value="현위치" onclick="nowhere();">
 							</div>
 							<br>
 							<div>
-								<input type="button" value="도착" onclick=""> <input
-									type="text" placeholder="지도에서 클릭해주세요.">
+								<input type="button" value="경로 설정" onclick="setPoint();">
+							</div>
+							<br>
+							<div>
+								<input type="button" value="교통 안내" onclick="traceRoute();">
 							</div>
 							<br>
 
 
 							<div id="rightMenu">
-								<div id="subTittle">경로지정</div>
-								<br> 카페 <input type="checkbox"> 식당 <input
-									type="checkbox"> <br> 문화시설 <input type="checkbox">
-								<br> 실내 <input type="checkbox"> 실외 <input
-									type="checkbox"> <br> <br> <br>
-								<div class="checkNotice" id="small">체크 후 클릭해주세요</div>
+								<br><input type="radio" name="pickPlace" value="FD6">식당
+								<br><input type="radio" name="pickPlace" value="AT4">관광지
+								<br><input type="radio" name="pickPlace" value="CE7">카페
+								<br><input type="radio" name="pickPlace" value="PK6">주차장
+								<br><input type="radio" name="pickPlace" value="OL7">주유소
+								<br><input type="radio" name="pickPlace" value="AD5">숙박
+								<br><input type="radio" name="pickPlace" value="HP8">병원
+								
+								<div class="checkNotice" id="small">원하는 장소를 선택하고 위치 보기를 누르세요</div>
+								<button onclick="setCategory();" value="위치 보기">위치 보기</button>
 							</div>
 							<br>
 
