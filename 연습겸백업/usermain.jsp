@@ -26,6 +26,9 @@ response.setHeader("Expires", "0");
 
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>♡Day Two♡</title>
 
 <style type="text/css">
@@ -45,13 +48,13 @@ body {
 .header {
 	margin-top: 10px;
 	margin-bottom: 3px;
-	margin-left: 20px;
-	margin-right: 20px;
-	width: 100%;
+	margin-left: 5%;
+	margin-right: 5%;
+	width: 90%;
 }
 
 .tittle {
-	width: 70%;
+	width: 100%;
 	background-color: rgb(197, 197, 197);
 	vertical-align: middle;
 	font-family: Georgia, "Malgun Gothic", serif;
@@ -60,37 +63,13 @@ body {
 	color: white;
 }
 
-.search-bar {
-	width: 100%;
-	height: 22px;
-	padding-bottom: 1px;
-	vertical-align: middle;
-	transform: translateX(0%);
-}
-
-#search-bar {
-	border-color: none;
-	float: right;
-	font-size: 12px;
-	font-style: italic;
-	position: relative;
-	padding-right: 5px;
-	margin-right: 5px;
-}
-
-#search-bar+input+button {
-	margin-right: 5px;
-	padding-right: 5px;
-	background: none;
-	color: none;
-	border-color: none;
-}
-
 .content {
-	width: 100%;
+	width: 90%;
 	height: 80%;
 	background-color: none;
-	position: fixed;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 #menuicon {
@@ -149,7 +128,7 @@ body {
 	transform: translateY(50%) rotate(-45deg);
 }
 
-div.sidebar {
+.sidebar {
 	margin-top: 2px;
 	width: 250px;
 	height: 100%;
@@ -158,9 +137,9 @@ div.sidebar {
 	float: right;
 	top: "";
 	left: -250px;
-	z-index: 1;
 	transition: all .35s;
 	transform: translateX(-5%);
+	z-index: 9999;
 }
 
 #menuicon:checked+label+div {
@@ -195,13 +174,13 @@ div.sidebar {
 	text-decoration: underline;
 }
 
-.map {
+#map {
 	margin: 0;
 	padding: 0;
 	border-right: 1px;
-	background: #dcdcdc;
 	width: 100%;
 	height: 100%;
+	border-radius: 10px;
 }
 
 #menuicon2 {
@@ -275,9 +254,9 @@ div.sidebar2 {
 	position: absolute;
 	top: "";
 	right: -250px;
-	z-index: 1;
 	transition: all .35s;
 	float: right;
+	z-index: 9999;
 }
 
 #menuicon2:checked+label+div.sidebar2 {
@@ -365,6 +344,13 @@ A:VISITED {
 }
 </style>
 
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=14d98dab324927581b361feaf2706975&libraries=services,clusterer"></script>
+
+<link rel="stylesheet" href="resources/css/style.css">
+
 </head>
 
 <body>
@@ -379,20 +365,18 @@ A:VISITED {
 		</div>
 	</div>
 
-	<div class="search-bar">
-		<span id="search-bar"><input type="text"
-			placeholder="검색어를 입력해주세요.">
-			<button onclick="">검색</button></span>
-	</div>
+
 	<!-- 메인로고 -->
+
+	<br>
 
 
 	<div class="content">
 		<!-- 전체틀 -->
-		<div class="map">
+		<div id="map">
 			<!-- 지도 -->
-
-			<div class="Menu" id="left">
+			<div class="Menu" id="left"
+				style="z-index: 9999; position: absolute;">
 				<input type="checkbox" id="menuicon"> <label for="menuicon">
 					<span></span> <span></span><span></span>
 				</label>
@@ -405,50 +389,45 @@ A:VISITED {
 						<a href="regist.do?command=logout"> 로그아웃</a>
 						<!-- 로그인페이지 -->
 					</div>
-					<br>
-					<br>
+					<br> <br>
 					<div class="leftMenu" id="subMenu">
 						<a href="recommend.jsp"> 추천코스 </a>
 						<!-- 추천코스 -->
 					</div>
-					<br>
-					<br>
+					<br> <br>
 					<div class="leftMenu" id="subMenu">
 						<a href="board.jsp"> 함께 하는 DayTwo </a>
 						<!-- 게시판+후기+커뮤 -->
 					</div>
-					<br>
-					<br>
+					<br> <br>
 					<div class="leftMenu" id="subMenu">
 						<a href=""> 내 캘린더 </a>
 					</div>
 					<!-- 사용자 로그인시에만 보이게 -->
-					<br>
-					<br>
+					<br> <br>
 					<div class="leftMenu" id="subMenu">
 						<a href="mypage.jsp"> 내 정보 수정 </a>
 						<!-- 정보수정 -->
 					</div>
-					<br>
-					<br>
-					<br>
-					<br>
+					<br> <br> <br> <br>
 					<div class="leftMenu" id="subMenu">
 						<a href="sponsor.jsp"> ☞ 후원하기 </a>
 					</div>
 					<br>
 					<!-- 결제api연결하기 -->
 				</div>
-
 			</div>
 
-			<div class="Menu" id="right">
+
+
+			<div class="Menu" id="right"
+				style="z-index: 9999; position: relative;">
 				<input type="checkbox" id="menuicon2"> <label
 					for="menuicon2"> <span></span> <span></span>
 				</label>
 
 				<div class="sidebar2">
-					<div class="sidebar2_all">
+					<div class="sidebar2_all" style="background-color: #eeebd5;">
 						<div id="subTittle">새로운 일정 만들기</div>
 						<br>
 						<form action="">
@@ -497,6 +476,7 @@ A:VISITED {
 
 
 			</div>
+
 		</div>
 
 
@@ -526,6 +506,8 @@ A:VISITED {
 
 
 	</div>
+
+	<script src="resources/js/map.js"></script>
 
 </body>
 </html>
