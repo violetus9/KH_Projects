@@ -519,10 +519,8 @@ function nearSearch() {
         function displayPlaceInfo(place) {
             let content = '<div class="placeinfo">' +
                 '   <a class="title" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">'
-                + place.place_name + '</a>' + '<div id="closeinfo" onclick="delInfo();" title="닫기" >닫기</div>'
-                + '<form action="savetest.jsp" method="get">'
-                + '<input type="text" value="' + place.place_name + '" name="placename" style="display:none;">'
-                + '<div id="saveinfo" title="찜하기">찜하기</div></form>';
+                + place.place_name + '</a>' + '<div id="closeinfo" onclick="delInfo();" title="닫기" >닫기</div>';
+                /*+ '<div id="saveinfo" title="찜하기">찜하기</div>'	*/
 
             if (place.road_address_name) {
                 content += '    <span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
@@ -543,9 +541,8 @@ function nearSearch() {
 
         // 클러스터 오버레이
         function clusterInfo(places) {
-            // 객체 내부 마커 수만큼 인자 받아와서 div생성(오버레이)
+            // 객체 내부 마커 수만큼(오버레이)
             let contentList = '';
-            // 출력 String임 for 써서 이어붙이기
             let cnt = 0;
             while (cnt !== places.length) {
                 contentList += '<div class="placeinfolist">' +

@@ -25,11 +25,32 @@ response.setHeader("Expires", "0");
 <title>♡ DayTwo - 오늘부터 1일? 우린 오늘부터 '데이투'! ♡</title>
 
 <head>
+
+<%
+    if (session.getAttribute("dto") == null) {
+        response.sendRedirect("mainIndex.html");
+    }
+
+%>
+
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>♡Day Two♡</title>
+
+<script type="text/javascript">
+function resultFun(x) { 
+	var positionLeft = x.clientX; var positionTop = x.clientY; 
+	document.getElementById('result').style.left = positionLeft - 10 + "px"; 
+	document.getElementById('result').style.top = positionTop - 10 +"px"; } 
+	if (document.addEventListener) { document.addEventListener("mousemove", resultFun); } 
+	else if (document.attachEvent) { document.attachEvent("onmousemove", resultFun); 
+	//attachEvent는 IE8이하와 오페라에서 사용하는 명령어이다
+	};
+
+
+</script>
 
 <style type="text/css">
 * {
@@ -55,11 +76,11 @@ body {
 
 .tittle {
 	width: 100%;
-	background-color: rgb(197, 197, 197);
+	background-color: rgb(238, 222, 226);
 	vertical-align: middle;
 	font-family: Georgia, "Malgun Gothic", serif;
 	font-weight: bolder;
-	vertical-align: middle;
+	align-items: center;
 	color: white;
 }
 
@@ -93,7 +114,7 @@ body {
 	width: 100%;
 	height: 5px;
 	border-radius: 30px;
-	background: rgb(92, 86, 86);
+	background: white;
 	transition: all .35s;
 }
 
@@ -131,15 +152,22 @@ body {
 .sidebar {
 	margin-top: 2px;
 	width: 250px;
-	height: 100%;
-	background-color: #eeebd5;
+	height: 643px;
 	position: absolute;
 	float: right;
-	top: "";
 	left: -250px;
 	transition: all .35s;
 	transform: translateX(-5%);
 	z-index: 9999;
+}
+
+div#sidebar_all.sidebar{
+background-color:  #BCDECB;
+	background:  #BCDECB;
+	width: 250px;
+	height: 643px;
+	top:0;
+	z-index: 1;
 }
 
 #menuicon:checked+label+div {
@@ -151,7 +179,7 @@ body {
 	padding: 0;
 	width: auto;
 	height: auto;
-	background-color: #eeebd5;
+	background-color: rgb(238, 222, 226)s;
 	font-weight: bolder;
 	font-color: white;
 	font-size: 17px;
@@ -190,9 +218,7 @@ body {
 #menuicon2+label {
 	margin: 2px;
 	border: 5px;
-	padding: 1px; <!--
-	border-style: solid; --> <!--
-	border-color: rgb(255, 235, 181); -->
+	padding: 1px;
 	background-color: none;
 	display: block;
 	margin: 5px;
@@ -212,8 +238,7 @@ body {
 	width: 70%;
 	height: 5px;
 	border-radius: 30%;
-	background: rgb(255, 235, 181); <!--
-	background: rgb(194, 194, 194); -->
+	background: white; 
 	transition: all .35s;
 }
 
@@ -249,10 +274,9 @@ body {
 div.sidebar2 {
 	padding: 1px;
 	width: 250px;
-	height: 100%;
-	background-color: #eeebd5;
+	height: 643px;
+	background:  #BCDECB;
 	position: absolute;
-	top: "";
 	right: -250px;
 	transition: all .35s;
 	float: right;
@@ -288,12 +312,16 @@ div.sidebar2 {
 	font-color: light grey;
 }
 
+#text{
+color: white;
+}
+
 #weather {
 	margin: 0;
 	padding: 2px;
 	border: 1px doubled light grey;
 	width: 180px;
-	height: 40px;
+	height: 30px;
 }
 
 #dust {
@@ -301,7 +329,7 @@ div.sidebar2 {
 	padding: 2px;
 	border: 1px doubled light grey;
 	width: 180px;
-	height: 40px;
+	height: 30px;
 }
 
 .checkNotice {
@@ -314,13 +342,13 @@ div.sidebar2 {
 }
 
 .finish {
-	width: 100px;
 	height: 20px;
 	font-weight: bolder;
 	text-color: white;
 	text-align: center;
 	align-content: center;
 	align-items: center;
+	transform: translateY(300%);
 }
 
 .footer {
@@ -334,13 +362,41 @@ div.sidebar2 {
 	color: light grey;
 }
 
-input {
-	color: light grey;
+
+		A:LINK {
+color: white;
+text-decoration: underline;
+}
+		A:HOVER {
+color: white;
+text-decoration: blink;
+}
+	
+	A:VISITED {
+color: white;
+text-decoration: underline;
 }
 
-A:VISITED {
-	color: rgb(197, 197, 197);
-	text-decoration: none;
+	A:ACTIVE {
+color: white;
+text-decoration: underline;
+}
+
+input{
+color: grey;
+background: white;
+
+}
+
+input:VISITED {
+color: white;
+text-decoration: inherit;
+}
+
+#result{
+
+z-index: 99;
+pointer-events: none;
 }
 </style>
 
@@ -355,13 +411,15 @@ A:VISITED {
 
 <body>
 
+<div id="result" style="position: absolute; background: pink; width: 15px; height: 15px; opacity: 0.4; border-radius: 100%;"> </div>
+
 	<%
 		LoginDto dto = (LoginDto) session.getAttribute("dto");
 	%>
 
 	<div class="header" onclick="location.href='main.jsp'">
 		<div class="tittle">
-			<h1>하루 종일, 우리 둘이 데이투 'Day Two'</h1>
+			<h1 style="text-align: center;">하루 종일, 우리 둘이 데이투 'Day Two'</h1>
 		</div>
 	</div>
 
@@ -380,44 +438,46 @@ A:VISITED {
 				<input type="checkbox" id="menuicon"> <label for="menuicon">
 					<span></span> <span></span><span></span>
 				</label>
+				
 				<div class="sidebar" id="sidebar_all">
+				<div id="sidebar_all">
 					<div class="leftMenu" id="subMenu">
-						<h1>안녕하세요 #님</h1>
+						<h4 style="color: grey;">안녕하세요 <%=dto.getMember_id() %>님!</h4>
 					</div>
-					<br>
+					<br><br><br>
 					<div class="leftMenu" id="subMenu">
 						<a href="regist.do?command=logout"> 로그아웃</a>
 						<!-- 로그인페이지 -->
 					</div>
-					<br> <br>
+					<br><br><br><br>
 					<div class="leftMenu" id="subMenu">
-						<a href="recommend.jsp"> 추천코스 </a>
+						<a href="recommend.jsp">추천코스 </a>
 						<!-- 추천코스 -->
 					</div>
-					<br> <br>
+					<br><br><br>
 					<div class="leftMenu" id="subMenu">
-						<a href="board.jsp"> 함께 하는 DayTwo </a>
+						<a href="board.do?command=boardlist"> 함께 하는 DayTwo </a>
 						<!-- 게시판+후기+커뮤 -->
 					</div>
-					<br> <br>
+					<br><br><br>
 					<div class="leftMenu" id="subMenu">
 						<a href=""> 내 캘린더 </a>
 					</div>
 					<!-- 사용자 로그인시에만 보이게 -->
-					<br> <br>
+					<br><br><br>
 					<div class="leftMenu" id="subMenu">
 						<a href="mypage.jsp"> 내 정보 수정 </a>
 						<!-- 정보수정 -->
 					</div>
-					<br> <br> <br> <br>
-					<div class="leftMenu" id="subMenu">
+					<br> <br> <br> <br><br><br>
+					<div class="leftMenu" id="subMenu" style="bottom:15px;">
 						<a href="sponsor.jsp"> ☞ 후원하기 </a>
 					</div>
 					<br>
 					<!-- 결제api연결하기 -->
 				</div>
 			</div>
-
+</div>
 
 
 			<div class="Menu" id="right"
@@ -427,7 +487,7 @@ A:VISITED {
 				</label>
 
 				<div class="sidebar2">
-					<div class="sidebar2_all" style="background-color: #eeebd5;">
+					<div class="sidebar2_all" style="background: #BCDECB;">
 						<div id="subTittle">새로운 일정 만들기</div>
 						<br>
 						<form action="">
@@ -443,37 +503,33 @@ A:VISITED {
 								<!-- 미세먼지api연결하기 -->
 							</div>
 							<!-- 지도api연결하기 -->
-							<div>
-								<input type="button" value="현위치" onclick="nowhere();">
-							</div>
-							<br>
-							<div>
-								<input type="button" value="경로 설정" onclick="setPoint();">
-							</div>
-							<br>
-							<div>
-								<input type="button" value="교통 안내" onclick="traceRoute();">
+							<div style="align-items: center; padding: 5px;">
+							<div><input type="button" value="현위치" onclick="nowhere();"></div>
+					
+							<div><input type="button" value="경로 설정" onclick="setPoint();"></div>
+								
+							<div><input type="button" value="교통 안내" onclick="traceRoute();"></div>				
+								
 							</div>
 							<br>
 
 
-							<div id="rightMenu">
+							<div id="rightMenu" style="transform: translateY(20%);" style="text-color: grey;">
 								<br><input type="radio" name="pickPlace" value="FD6">식당
-								<br><input type="radio" name="pickPlace" value="AT4">관광지
-								<br><input type="radio" name="pickPlace" value="CE7">카페
+								<input type="radio" name="pickPlace" value="AT4">관광지
+								<input type="radio" name="pickPlace" value="CE7">카페
 								<br><input type="radio" name="pickPlace" value="PK6">주차장
-								<br><input type="radio" name="pickPlace" value="OL7">주유소
-								<br><input type="radio" name="pickPlace" value="AD5">숙박
-								<br><input type="radio" name="pickPlace" value="HP8">병원
+								<input type="radio" name="pickPlace" value="OL7">주유소
+								<input type="radio" name="pickPlace" value="AD5">숙박
+								<input type="radio" name="pickPlace" value="HP8">병원
 								
 								<div class="checkNotice" id="small">원하는 장소를 선택하고 위치 보기를 누르세요</div>
-								<button onclick="setCategory();" value="위치 보기">위치 보기</button>
+								<button onclick="setCategory();" value="위치 보기" style="color: grey; background: white;">위치 보기</button>
 							</div>
-							<br>
+							
 
-							<div class="finish" id="rightMenu">
-								<input type="submit" value="완료">/<input type="reset"
-									value="재설정">
+							<div class="finish" id="rightMenu" style="color: grey;">
+								<input type="reset" value="재설정" style="color: grey;">
 							</div>
 						</form>
 					</div>
