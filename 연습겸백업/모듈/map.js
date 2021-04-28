@@ -1,8 +1,9 @@
 
 
 
-
+// 지도상 마커들 담는 배열
 let markers = [];
+// 출발, 도착지점 설정 좌표
 let startCoord = null;
 let endCoord = null;
 
@@ -321,7 +322,8 @@ function setPoint() {
 
         showDistance(content, endCoord);
 
-        traceRange();
+        // 요거 해제하면 우클릭시 범위 설정(원표시)도 같이 적용돼요
+        // traceRange();
 
     };
 
@@ -337,7 +339,9 @@ function traceRoute() {
         alert("출발, 도착 지점을 먼저 설정하세요");
 
     } else {
-        window.open("http://map.naver.com/index.nhn" + "?slng=" + startCoord.getLng() + "&slat=" + startCoord.getLat() + "&stext=출발" + "&elng=" + endCoord.getLng() + "&elat=" + endCoord.getLat() + "&etext=도착" + "&menu=route&pathType=1", "", "width=700px, height=700px");
+        window.open("http://map.naver.com/index.nhn" + "?slng=" + startCoord.getLng() + "&slat=" + startCoord.getLat()
+            + "&stext=출발" + "&elng=" + endCoord.getLng() + "&elat=" + endCoord.getLat()
+            + "&etext=도착" + "&menu=route&pathType=1", "", "width=700px, height=700px");
     }
 
 }
@@ -392,8 +396,8 @@ function traceRange() {
     HP8 : 병원
 */
 function setCategory() {
-	
-		event.preventDefault();
+
+    event.preventDefault();
     traceRange();
     /*	
         let nodeList = document.getElementsByName('pickPlace');
@@ -519,8 +523,8 @@ function nearSearch() {
         function displayPlaceInfo(place) {
             let content = '<div class="placeinfo">' +
                 '   <a class="title" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">'
-                + place.place_name + '</a>' + '<div id="closeinfo" onclick="delInfo();" title="닫기" >닫기</div>';
-                /*+ '<div id="saveinfo" title="찜하기">찜하기</div>'	*/
+                + place.place_name + '</a>' + '<div id="closeinfo" onclick="delInfo();" title="닫기" >닫기</div>'
+                + '<div id="saveinfo" title="찜하기">찜하기</div></form>';
 
             if (place.road_address_name) {
                 content += '    <span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
