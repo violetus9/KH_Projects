@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link	href="resources/css/main.css"
+		rel="stylesheet"
+		type="text/css" />
+
+</head>
+<body>
+
+<!-- 그 사진 내가 찍어서 저장해 올리면 약간 깨지는? 해상도가 잘 안먹는 문제가 있음 (원본에서 확대돼서 그런건지 확인해볼것, 저번에 sav파일이었나 그걸로 하면 확축해도 선명하다는데 찾아봐라~) -->
+
+	<div id="header">
+		<div id="head_up">
+			<div id=h_u_in>
+				<div id="h_u_left">
+					<span>
+						<a href="https://web.dominos.co.kr/main"><img src="resources/img/logo1.PNG"></a>
+					</span>
+					<span>
+						<a href=""><img id="top_middle" src="resources/img/nearpromo.PNG" width="350px;"></a>
+					</span>
+				</div>
+				<div id="h_u_right">
+					<span>
+						<span><a href="https://web.dominos.co.kr/global/login"><b>로그인</b></a></span>
+						<span><a href="https://web.dominos.co.kr/global/login?L=L"><b>회원가입</b></a></span>
+						<select name="language">
+							<option value="KOR">KOR</option>
+							<option value="ENG">ENG</option>
+						</select><br/>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div id="head_down">
+			<div id="h_d_in">
+				<div id="h_d_left">
+					<ul>
+						<li><a href="https://web.dominos.co.kr/goods/list?dsp_ctgr=C0101"><b>메뉴</b></a></li>
+						<li><a class="forpadding" href="https://web.dominos.co.kr/ecoupon/index"><b>e-쿠폰</b></a></li>
+						<li><a class="forpadding" href="https://web.dominos.co.kr/voucher/list?gubun=M"><b>상품권 선물</b></a></li>
+						<li><a class="forpadding" href="https://web.dominos.co.kr/event/list?gubun=E0200"><b>이벤트&middot;제휴</b></a></li>
+						<li><a class="forpadding" href="https://web.dominos.co.kr/branch"><b>매장검색</b></a></li>
+					</ul>
+				</div>
+				<div id="h_d_right">
+					<label id="more_view" for="v_line"><b>더보기</b></label>
+	<!-- 보류 -->		<button id="v_line"><img src="resources/img/vline.png"></button>
+				</div>
+			</div>
+		</div>	
+	</div>
+	
+	
+	
+	
+	<!-- -----------------본문------------------ -->
+	
+	
+	
+	<div id="main">
+		<!-- 메인 네개  -->
+		<div id="banner">
+			<div id="banner_in">	<!-- 사진을 일렬로 가져와서 하면될듯 -->
+									<!-- 근데 안됨 너무커서 아래로붙는건진 뭔지 몰겟는데 아마도.. 옆 10퍼로 하면 잘붙는거보면 ㅇㅇ맞는듯 -->
+				<div id="pic">
+					<div id="upper"></div>
+					<a href="https://web.dominos.co.kr/event/viewHtml?seq=1325&gubun=E0200">
+					<img src="https://cdn.dominos.co.kr/admin/upload/banner/20210121_A9WngC6E.jpg"></a>
+					<a href="https://web.dominos.co.kr/event/viewHtml?seq=1145&gubun=E0300">
+					<img src="https://cdn.dominos.co.kr/admin/upload/banner/20210115_3B9lp89X.jpg"></a>
+					<a href="https://web.dominos.co.kr/hotdeal/specialSet3">
+					<img src="https://cdn.dominos.co.kr/admin/upload/banner/20201231_OCcovAG5.jpg"></a>
+					<a href="https://web.dominos.co.kr/event/viewHtml?seq=1318&gubun=E0200">
+					<img src="https://cdn.dominos.co.kr/admin/upload/banner/20201231_AH0NfnRc.jpg"></a>
+					<a href="https://web.dominos.co.kr/event/viewHtml?seq=1225&gubun=E0200">
+					<img src="https://cdn.dominos.co.kr/admin/upload/banner/20200828_TFyOXcv3.jpg"></a>
+					<a href="https://web.dominos.co.kr/event/viewHtml?seq=1146&gubun=E0200">
+					<img src="https://cdn.dominos.co.kr/admin/upload/banner/20200401_sJg8GN4w.jpg"></a>
+					<div id="lower"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="order">
+			<div id="order_in">
+				<ul>
+					<li><a href="https://web.dominos.co.kr/global/login"><img src="resources/img/driver.PNG" width="70%" height="70%">
+					</a><br><b class="grayy">등급별 최대 30%</b></li>
+					<li><a href="https://web.dominos.co.kr/global/login"><img class="movelittle" src="resources/img/pickup.PNG" width="70%" height="70%">
+					</a><br><b class="grayy">등급별 최대 40%</b></li>
+					<li><a href="https://web.dominos.co.kr/quickOrder/index"><img class="movelittle" id="downlittle" src="resources/img/quickorder.PNG" width="70%" height="70%">
+					</a><br><b class="grayy">자주 이용하는 메뉴를</b><br><b class="grayy">더 빠르게 주문해보세요!</b></li>
+				</ul>
+			</div>
+		</div>
+		
+		<div id="membership">
+			<div id="member_in">
+				<div id="member_left">
+					<p>도미노피자의<br><b id="bluee">특별한 매니아 혜택</b><br>누려보세요!</p>
+					<div id=member_login>
+						<p id="whitee" onclick="location.href='https://web.dominos.co.kr/global/login'" >
+						<a href="https://web.dominos.co.kr/global/login"><b>로그인</b></a></p>
+					</div>
+				</div>
+				<div id="mem_arrL"></div>
+				<div id="member_right">
+					<div id="m_r_inside">	
+						<a href="#"><img src="https://cdn.dominos.co.kr/domino/pc/images/main/main_card1.png"></a>
+						<a href="#"><img src="https://cdn.dominos.co.kr/domino/pc/images/main/main_card2.gif"></a>
+						<a href="#"><img src="https://cdn.dominos.co.kr/domino/pc/images/main/main_card3.png"></a>
+						<a href="#"><img src="https://cdn.dominos.co.kr/domino/pc/images/main/main_card5.png"></a>
+					</div>	
+				</div>
+				<div id="mem_arrR"></div>
+			</div>
+		</div>
+		
+		<div id="other">
+			<div id="other_in">
+				<div id="other_in_pic">
+					<a href="#"><img src="https://cdn.dominos.co.kr/admin/upload/banner/20200626_9PFh173Q.jpg"></a>
+					<a href="#"><img src="https://cdn.dominos.co.kr/admin/upload/banner/20201113_jnFTL88V.jpg"></a>
+					<a href="#"><img src="https://cdn.dominos.co.kr/admin/upload/banner/20201127_0Bh97A50.jpg"></a>
+					<a href="#"><img src="https://cdn.dominos.co.kr/admin/upload/banner/20201221_WxeivHS0.jpg"></a>
+				</div>	
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	<!-- -----------------바닥------------------ -->
+	
+	<hr>
+	
+	
+	
+	
+	
+	<div id="footer">
+		<div id="foot_up">
+			<div id="foot_up_in">
+				<div id="foot_up_left">
+					<div id="foot_up_left_up">
+						<img src="resources/img/logo1.PNG" width="120px" height="30px"><span><b>1577-3082</b></span>
+					</div><br/>
+					<ul>
+						<li><a class="linkgray" href="https://web.dominos.co.kr/contents/law">이용약관</a></li>
+						<li><a class="linkgray" href="https://web.dominos.co.kr/contents/privacy"><b id="blackk">개인정보처리방침</b></a></li>
+						<li><a class="linkgray" href="https://web.dominos.co.kr/contents/locationLaw">위치기반서비스</a></li>
+						<li><a class="linkgray" href="https://web.dominos.co.kr/contents/youthProtection">청소년보호방침</a></li>
+						<li><a class="linkgray" href="https://web.dominos.co.kr/bbs/faqList?view_gubun=W&bbs_cd=online">고객센터</a></li>
+						<li><a class="linkgray" href="https://web.dominos.co.kr/company/jobList?type=R">인재채용</a></li>
+						<li><a class="linkgray" href="https://web.dominos.co.kr/company/contents/chainstore1">가맹점모집</a></li>
+						<li><a class="linkgray" href="https://web.dominos.co.kr/order/groupOrder">단체주문</a></li>
+					</ul><br/>
+					<p id="inform">
+						06223 서울특별시 강남구 역삼로25길 35(역삼동, 청오큐브타워) 청오디피케이(주) | 대표이사:오광현<br/>
+						사업자 등록번호 : 220-81-03371 | 통신판매업신고 : 강남5064호 | 개인정보 보호책임자: 이명윤<br/>
+						문의 : webmaster@dominos.co.kr<br/>
+						Copyright &copy; Domino's Pizza. All rights reseved.<br/>
+						<br/>
+						청오디피케이(주)의 사전 서면동의 없이 도미노피자 사이트(PC,모바일,앱)의 일체의 정보,콘텐츠 및 UI 등을 상업적 목적으로 전재, 전송, 스크래핑 등 무단 사용할 수 없습니다.</p>
+				</div>
+				<div id="foot_up_right">
+					<div id="f_u_r_top">
+						<select name="language">
+							<option value="KOR">KOR</option>
+							<option value="ENG">ENG</option>
+						</select><br/><hr>
+						<p id="downloadapp">DOWNLOAD APP</p>
+						<a href="https://itunes.apple.com/kr/app/dominopija-domino-pizza-korea/id371008429?mt=8"><img src="resources/img/apple.PNG"></a>
+						<a href="https://play.google.com/store/apps/details?id=kr.co.d2.dominos"><img src="resources/img/playstore.PNG"></a>
+					</div>
+					<br><br><br><br><br>
+					<div id="f_u_r_dn">
+						<a href="http://blog.naver.com/dominostory"><img src="resources/img/b.PNG" width="27px" height="27px"></a>
+						<a href="https://www.instagram.com/dominostory/"><img src="resources/img/insta.PNG" width="27px" height="27px"></a>
+						<a href="https://www.facebook.com/dominostory/"><img src="resources/img/fb.PNG" width="27px" height="27px"></a>
+						<a href="https://www.youtube.com/user/dominostory3082"><img src="resources/img/youtub.PNG" width="27px" height="27px"></a>
+						<a href="https://twitter.com/dominostory"><img src="resources/img/twitt.PNG" width="27px" height="27px"></a>
+					</div>
+					
+				</div> 
+			</div>
+		</div>
+		<div id="foot_down">
+			<div id="foot_down_in">
+				<ul id="susang">
+					<li><img src="https://cdn.dominos.co.kr/domino/pc/images/list_awards.png">
+					<p>식품안전<br>경영시스템 인증</p></li>
+					<li><img src="https://cdn.dominos.co.kr/domino/pc/images/list_awards2.png">
+					<p>지식경제부<br>우수디자인 선정</p></li>
+					<li><img src="https://cdn.dominos.co.kr/domino/pc/images/list_awards3.png">
+					<p>2020년 고객이 가장 추천하는 기업<br>피자전문점 부문 8년 연속 1위</p></li>
+					<li><img src="https://cdn.dominos.co.kr/domino/pc/images/list_awards4.png">
+					<p>2020년 한국산업 고객만족도<br>피자전문점 부문 6년 연속 1위</p></li>
+					<li><img src="https://cdn.dominos.co.kr/domino/pc/images/list_awards5.png">
+					<p>2020년 프리미엄브랜드지수<br>피자전문점 부문 5년 연속 1위 수상</p></li>
+					<li><img src="https://cdn.dominos.co.kr/domino/pc/images/list_awards6.png">
+					<p>대학생 1000명이 선택한<br>2019 올해의 핫 브랜드 캠퍼스 잡앤조이 선정</p></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,453 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+li{
+	list-style: none;
+	display: inline-block;
+	vertical-align: middle;
+}
+.linkgray{
+	text-decoration: none;
+	color: gray;
+}
+p{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+
+/* 머립 */
+
+
+
+#header{
+	height: 140px;
+/*	border: 1px dashed blue;*/
+}
+
+#head_up{
+	height: 85px;
+/*	border: 1px dashed blue;*/
+}
+#h_u_in{
+	padding-top: 20px;
+	width: 1200px;
+	margin: auto;
+/*	border: 1px dotted green;*/
+}
+#h_u_left{
+	float: left;
+}
+#h_u_right{
+	padding-top: 15px;
+	float: right;
+}
+#h_u_right span{
+	padding-right: 15px;
+}
+#h_u_right a{
+	text-decoration: none;
+	color: black;
+	font-size: 10pt;
+}
+#top_middle{
+	transform: translate(250px, 2px);
+}
+
+#head_down{
+	height: 55px;
+}
+#h_d_in{
+	padding-top: 10px;
+	width: 1200px;
+	margin: auto;
+	height: 45px;
+/*	border: 1px dotted red;*/
+	color: #4f4f4f;
+}
+#h_d_left{
+/*	border: 1px dashed blue;*/
+	float: left;
+}
+.forpadding{
+	padding-left: 60px;
+}
+#h_d_left a{
+	color: #4f4f4f;
+	text-decoration: none;
+	font-size: 13pt;
+	letter-spacing: -1px;
+	padding-right: 60px;
+}
+#h_d_right{
+/*	border: 1px dashed orangered;*/
+	float: right;
+	width: 85px;
+}
+#more_view{
+	font-size: 13pt;
+	float: left;
+/*	border: 1px dashed red;*/
+	z-index: 3;
+}
+#more_view:hover{
+	cursor: pointer;
+}
+#v_line{
+	float: right;
+/*	border: 1px dotted black;*/
+	width: 30px;
+	size: 80%;
+	padding-right: 4px;
+	padding-top: 4px;
+	background-color: white;
+	outline: none;
+	border-style: hidden;
+}
+#v_line:hover{
+	cursor: pointer;
+}
+@keyframes curv{
+	100%{transform: rotate(-180deg);}
+}
+
+#v_line:focus{
+	animation: curv 0.2s linear;
+	animation-fill-mode: both;
+}																		
+																			/* 대환장부분 */
+																	/*
+																	active 눌렀을때만 활성화
+																	hover 당연히 아니고  오히려 버튼 or check 접근해볼것
+																	중복처리 가능한가? 모름 ㅎ
+																	심지어 버튼은 일방향임 돌아올수없음 ㅡㅡ
+																	*/
+																	
+																	
+
+
+/* 본문 */
+
+
+
+
+#main{
+	height: 1740px;
+/*	border: 1px dashed red;*/
+}
+
+#banner{
+	height: 480px;
+/*	border: 1px dashed hotpink;*/
+}
+#banner_in{
+	height: inherit;
+	margin: auto;
+/*	border: 1px dotted purple;*/
+	overflow: hidden;
+}
+
+#pic img{
+	left: -150px;
+	position: relative;
+}
+#pic{
+	transition: transform 12s linear;
+	
+}
+#pic:hover{
+	transform: translate(0px, -2500px);
+}
+
+/* 별짓을 해도 안되는구나 ㅈㅈ
+#upper{
+	position: absolute;
+	z-index: 10;
+	width: 100%;
+	height: 100px;
+	border: 1px dotted blue;
+}
+#lower{
+	position: absolute;
+	z-index: 10;
+	width: 100%;
+	height: 100px;
+	border: 1px dotted blue;
+	top: 520px;
+}
+
+@keyframes upp{
+	100%{transform: translate(0, 520px;)}
+}
+#upper:hover, #lower:hover{
+	cursor: pointer;
+	animation: upp 1s linear;
+}
+#pic img:hover{
+	animation: upp 1s linear;
+	animation-fill-mode: both;
+}
+*/
+
+
+
+#order{
+	height: 280px;
+/*	border: 1px dashed gold;*/
+}
+#order_in{
+	padding-top: 35px;
+	width: 1200px;
+	height: inherit;
+/*	border: 1px dotted purple;*/
+	margin: auto;
+}
+#order_in li img{
+	display: inline-block;
+	padding-left: 80px;
+}
+.grayy{
+	padding-left: 80px;
+	color: #939393;
+}
+#downlittle{
+	padding-top: 15px;
+}
+
+
+
+
+#membership{
+	height: 430px;
+/*	border: 1px dashed blue;*/
+	background-color: #f1f1f1;
+}
+#member_in{
+	padding-top: 110px;
+	width: 1200px;
+	height: 210px;
+	margin: auto;
+/*	border: 1px dashed red;*/
+}
+#member_left{
+	height: inherit;
+	width: 220px;
+/*	border: 1px dotted blue;*/
+	float: left;
+}
+#member_left p{
+	letter-spacing: -2px;
+	font-size: 20pt;
+	line-height: 28pt;
+}
+#bluee{
+	color: #459df5;
+}
+#member_login{
+																		/* 배치 아래로 */
+	margin-top: 35px;
+/*	border: 1px dotted red;*/
+}
+#member_login p{
+	width: 100px;
+	height: 40px;
+	text-align: center;
+	background-color: black;
+	line-height: 30px;
+	border-radius: 20px;
+	
+}
+#member_login a{
+	text-decoration: none;
+	color: ghostwhite;
+	font-size: 12pt;
+}
+#whitee:hover{
+	cursor: pointer;
+}
+
+#other{
+	height: 550px;
+/*	border: 1px dashed green;*/
+}
+
+#m_r_inside{
+	position: absolute;
+	height: 200px;
+/*	border: 1px dotted red;*/
+	left: 500px;
+	width: 870px;
+	transition: transform 2s;
+}
+
+
+#mem_arrL{
+	margin-top: -30px;
+	position: absolute;
+	z-index: 5;
+	height: 300px;
+	width: 105px;
+	left: 480px;
+	background-color: #f1f1f1;
+/*	border: 1px dotted hotpink;*/
+}
+#mem_arrR{
+	margin-top: -30px;
+	position: absolute;
+	z-index: 5;
+	height: 300px;
+	width: 105px;
+	left: 1360px;
+	background-color: #f1f1f1;
+/*	border: 1px dotted green;*/
+}
+#mem_arrL:hover, #mem_arrR:hever{
+	cursor: pointer;
+	
+}
+#m_r_inside:hover{transform: translate(100px, 0px); }
+
+
+
+
+
+#other_in{
+	width: 1200px;
+/*	border: 1px dashed blue;*/
+	height: inherit;
+	margin: auto;
+	overflow: hidden;
+}
+
+#other_in_pic{
+	width: 1800px;
+/*	border: 1px dotted pink;*/
+	height: auto;
+	margin: auto;
+	margin-top: 70px;
+	transition: transform 2s;
+}
+#other_in_pic img{
+	padding-left: 55px;
+}
+#other_in_pic:hover{
+	transform: translate(-390px, 0px);
+}
+
+
+
+
+
+
+
+/* 바닥ㄷ다갇갇갇고독돋갇갇가 */
+
+
+#footer{
+	height: 430px;
+/*	border: 1px dashed green;*/
+}
+
+#foot_up{
+	padding-top: 50px;
+	height: 280px;
+/*	border: 1px dashed yellowgreen;*/
+}
+
+#foot_up_in{
+	
+	width: 1200px;
+	height: 220px;
+/*	border: 1px dashed red;*/
+	margin: auto;
+}
+
+#foot_up_left{
+	width: 900px;
+	height: inherit;
+/*	border: 1px dashed blue;*/
+	float: left;
+}
+#foot_up_left_up span{
+	padding-left: 11px;
+	font-size: 20pt;
+	line-height: 30px;
+	vertical-align: top;
+}
+#foot_up_left ul{
+	line-height: 10px;
+}
+#blackk{
+	color: black;
+}
+#foot_up_left ul li{
+																		/* 밑줄 없애야돼 */
+	padding-right: 7.5px;
+	font-size: 12pt;
+	letter-spacing: -1px;
+}
+
+#inform{
+	letter-spacing: -1.5px;
+	padding-top: 15px;
+	line-height: 19px;
+	font-size: 9pt;
+	color: gray;
+}
+
+#foot_up_right{
+	width: 175px;
+	height: inherit;
+/*	border: 1px dashed blue;*/
+	float: right;
+}
+#downloadapp{
+	letter-spacing: -2px;
+	font-size: 11pt;
+	float: left;
+	padding-top: 20px;
+}
+#f_u_r_top img{
+	width: 25px;
+	height: 25px;
+	padding-left: 8px;
+	padding-top: 18px;
+}
+
+															/* 아 왜 안먹히냐고 */
+#f_u_r_dn{
+	vertical-align: bottom;
+	padding-left: 2px;
+}
+
+
+
+
+
+#foot_down{
+	height: 100px;
+/*	border: 1px dashed blue;*/
+	background-color: #f1f1f1;
+}
+
+#foot_down_in{
+	position: inherit;
+	width: 1200px;
+/*	border: 1px dashed hotpink;*/
+	margin: auto;
+	padding-top: 25px;
+}
+#foot_down_in #susang li p{
+	font-size: 6pt;
+	letter-spacing: -0.5px;
+	color: gray;
+	padding-right: 7px;
+}
+#foot_down_in #susang li img{
+	width: auto;
+	vertical-align: middle;
+	display: inline-block;
+	padding-left: 14px;
+}
+
