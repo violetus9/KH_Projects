@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>지도 사용법</title>
+
+  <!-- 지도 부르려면 아래 스크립트 선언하고 style.css, map.js 불러 줘야돼 -->
+  <script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=^^^^^^^^본인의키를입력하세요^^^^^^^^&libraries=services,clusterer"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- "map" 맵 생성합니다
+      스타일에 지도 크기 주삼 ^^  -->
+  <div id="map" style="height: 500px; width: 800px;"></div>
+
+  <!-- nowhere() 현위치 -->
+  <button onclick="nowhere();">현위치</button>
+  <!-- setPoint() 깃발 드래그로 위치 설정 + 우클릭으로 거리 계산 -->
+  <button onclick="setPoint();">위치설정</button>
+  <!-- traceRoute() 위치 설정 하고 발동할 수 있는 기능, 네이버지도로 팝업됨 -->
+  <button onclick="traceRoute();">교통안내</button>
+  <!-- traceRange() 이게 원뜨게 하는거임 -->
+  <button onclick="traceRange();">범위표시</button>
+
+  <br><br><br><br>
+
+  <h4>장소선택하고 위치보기 실행하면 맵에 지점 뜹니다</h4>
+  <div>
+    <input type="radio" name="pickPlace" value="FD6">식당
+    <input type="radio" name="pickPlace" value="AT4">관광지
+    <input type="radio" name="pickPlace" value="CE7">카페
+    <input type="radio" name="pickPlace" value="PK6">주차장
+    <input type="radio" name="pickPlace" value="OL7">주유소
+    <input type="radio" name="pickPlace" value="AD5">숙박
+    <input type="radio" name="pickPlace" value="HP8">병원
+
+    <button onclick="setCategory();">위치 보기</button>
+  </div>
+
+  <!-- 친절하게 주석 달아놨으니까 보고 하세요 ^^ -->
+  <script src="map.js"></script>
+
+</body>
+
+</html>
